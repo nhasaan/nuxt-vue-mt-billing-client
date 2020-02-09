@@ -102,7 +102,7 @@ module.exports = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: process.env.API_BASE_URL || 'http://film-api.test/api/v1'
+    baseURL: process.env.API_BASE_URL || 'http://mt-billing.test/api/v1'
   },
   /*
    ** Build configuration

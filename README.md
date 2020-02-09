@@ -1,4 +1,4 @@
-# product
+# MultiTenant Billing
 
 > Product listing app
 

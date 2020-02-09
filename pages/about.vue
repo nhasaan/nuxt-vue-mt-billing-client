@@ -3,7 +3,7 @@
     <div>
       <logo />
       <h1 class="title">
-        product
+        Multi Tenant Billing
       </h1>
       <h2 class="subtitle">
         Product listing app
