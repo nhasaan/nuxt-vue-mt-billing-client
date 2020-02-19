@@ -90,6 +90,7 @@ module.exports = {
     '@nuxtjs/bulma',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
     '@nuxtjs/pwa',
     '@nuxtjs/toast',
     // https://github.com/nuxt-community/vuetify-module
@@ -104,6 +105,28 @@ module.exports = {
   axios: {
     baseURL: process.env.API_BASE_URL || 'http://mt-billing.test/api/v1'
   },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: process.env.API_BASE_URL + 'auth/login', method: 'post', propertyName: 'data.token' },
+          user: { url: process.env.API_BASE_URL + 'auth/mine', method: 'post', propertyName: 'data' },
+          logout: false
+        }
+      }
+    },
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/',
+      home: '/'
+    }
+  },
+  // router: {
+  //   middleware: ['auth']
+  // },
+
   /*
    ** Build configuration
    */

@@ -4,22 +4,18 @@ import cookie from 'js-cookie'
 import parser from 'cookie'
 
 export const state = () => ({
-  authUser: null,
-  isAuthenticated: false,
-  userinfo: {},
-  role: '',
-  permissions: [],
-  heading: {
-    title: '',
-    subtitle: ''
+  auth: {
+    loggedIn: false,
+    token: null,
+    user: null
   }
 })
 
 export const mutations = {
-  SET_USER (state, user) {
-    state.authUser = user.token
-    state.userinfo = user.userinfo
-    state.isAuthenticated = user.isAuthenticated
+  SET_USER (state, data) {
+    state.auth.token = data.token
+    state.auth.loggedIn = data.isAuthenticated
+    state.auth.user = data.userinfo
   },
   SET_HEAD (state, heading) {
     state.heading.title = heading[0]
@@ -37,11 +33,11 @@ export const actions = {
       try {
         if (req.headers.cookie) {
           const c = parser.parse(req.headers.cookie)
-          const user = c.films_cookie ? JSON.parse(c.films_cookie) : {
+          const userData = c.multi_tenant_cookie ? JSON.parse(c.multi_tenant_cookie) : {
             token: '1'
           }
-          if (user.token && user.token.length > 0) {
-            commit('SET_USER', user)
+          if (userData.token && userData.token.length > 0) {
+            commit('SET_USER', userData)
           }
         }
       } catch (e) {
@@ -72,8 +68,9 @@ export const actions = {
     // let userInfo = {userinfo: result.data.fname}
     if (result.success) {
       commit('SET_USER', result.userData)
-      cookie.set('films_cookie', result.userData)
+      cookie.set('multi_tenant_cookie', result.userData)
     }
+    return result
   },
   async signup ({
     commit
@@ -107,7 +104,7 @@ export const actions = {
     const response = await fetch(`${process.env.API_BASE_URL}/auth/logout`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${this.state.authUser}`
+        Authorization: `Bearer ${this.state.auth.token}`
       }
     })
     const result = await response.json()
@@ -115,8 +112,8 @@ export const actions = {
       commit('SET_USER', {
         userData: {}
       })
-      cookie.set('films_cookie', null)
-      this.$router.push('/signin')
+      cookie.set('multi_tenant_cookie', null)
+      this.$router.push('/login')
     }
   }
   /* forgotpassword({ commit }, { email }) {

@@ -105,7 +105,7 @@
               Sign up
             </button>
             Already have an account?
-            <nuxt-link to="/signin">
+            <nuxt-link to="/login">
               Sign in
             </nuxt-link>
           </p>
@@ -117,8 +117,7 @@
 
 <script>
 export default {
-  middleware: 'noauth',
-  layout: 'listing-layout',
+  auth: false,
   data: () => ({
     email: '',
     password: '',
@@ -154,10 +153,10 @@ export default {
       })
       const result = await response.json()
       if (result.success) {
-        this.$toast.error(
+        this.$toast.success(
           'Congrats, successfuly signup. Please check and verify your email!'
         )
-        this.$router.push('/admin')
+        // this.$router.push('/admin')
       } else if (result.error.code === 11000) {
         this.$toast.error('Please filled out all required field')
       }

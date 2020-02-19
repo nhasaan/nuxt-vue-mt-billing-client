@@ -63,8 +63,7 @@
 
 <script>
 export default {
-  layout: 'listing-layout',
-  middleware: 'noauth',
+  auth: false,
   asyncData () {
     return {
       formError: null,
@@ -83,16 +82,27 @@ export default {
           remember_me: this.remember_me
         })
         .then((result) => {
-          this.email = ''
-          this.password = ''
-          this.formError = null
+          if (result && result.success) {
+            this.email = ''
+            this.password = ''
+            this.formError = null
 
-          if (this.$store.state.userinfo) {
-            this.$router.push('/admin')
+            if (this.$store.state.auth.user) {
+              this.$toast.success(
+                'Login is successfull. You will be redirected soon...',
+                { duration: 3000 }
+              )
+              setTimeout(() => {
+                this.$router.push('/admin')
+              }, 3000)
+            }
+          } else {
+            this.$toast.error('There is an error, Please try later...!')
           }
         })
         .catch((e) => {
           this.formError = e.message
+          this.$toast.error(this.formError)
         })
     }
     /* --------------End login-------------- */

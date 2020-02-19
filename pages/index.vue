@@ -3,19 +3,14 @@
     <div>
       <logo />
       <h1 class="title">
-        Multi Tenant Billing
+        Multi Tenant SaaS
       </h1>
       <h2 class="subtitle">
-        Product listing app
+        Signup and subscribe to your liked package.
+        <br>And start billing your clients right away
       </h2>
       <div class="links">
-        <nuxt-link to="/products" class="button--grey">
-          Products
-        </nuxt-link>
-        <nuxt-link to="/products/detail" class="button--grey">
-          Detail
-        </nuxt-link>
-        <nuxt-link to="/signin" class="button--grey">
+        <nuxt-link to="/login" class="button--grey">
           Login
         </nuxt-link>
         <nuxt-link to="/signup" class="button--grey">
@@ -30,6 +25,7 @@
 import Logo from '~/components/Logo.vue'
 
 export default {
+  auth: false,
   components: {
     Logo
   }

@@ -51,7 +51,7 @@ import Sidebar from '~/components/Sidebar.vue'
 export default {
   middleware: ['security'],
   meta: {
-    auth: { authority: 2 }
+    auth: { authority: 0 }
   },
   components: {
     Logo,

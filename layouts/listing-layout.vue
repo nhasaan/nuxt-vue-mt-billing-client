@@ -21,9 +21,7 @@
           </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/admin">
-            Admin
-          </nuxt-link>
+          <a @click="logout">Log out</a>
         </li>
       </nav>
     </header>

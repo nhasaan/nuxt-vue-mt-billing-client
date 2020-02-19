@@ -2,11 +2,11 @@
   <div class="container-fluid">
     <div class="text-center">
       <h3 class="title">
-        Tenant datatable using vuetify
+        Invoice datatable using vuetify
       </h3>
       <hr>
       <div v-if="datas.length === 0">
-        <h2>No tenant found at the moment</h2>
+        <h2>No invoice found at the moment</h2>
       </div>
     </div>
     <!-- @update:pagination="onChangePagination" -->
@@ -17,7 +17,7 @@
           :headers="headers"
           :items="datas"
           :options.sync="options"
-          :server-items-length="totalTenants"
+          :server-items-length="totalInvoices"
           :loading="loading"
           :dense="dense"
           :page="page"
@@ -35,13 +35,13 @@
           </template>
           <template v-slot:top>
             <v-toolbar flat color="white">
-              <v-toolbar-title>Tenant CRUD</v-toolbar-title>
+              <v-toolbar-title>Invoice CRUD</v-toolbar-title>
               <v-divider class="mx-4" inset vertical />
               <v-spacer />
               <v-dialog v-model="dialog" max-width="500px">
                 <template v-slot:activator="{ on }">
                   <v-btn v-on="on" color="primary" dark class="mb-2">
-                    Create Tenant
+                    Create Invoice
                   </v-btn>
                 </template>
                 <v-card>
@@ -53,7 +53,7 @@
                     <v-container>
                       <v-row>
                         <v-col cols="12">
-                          <v-text-field v-model="editedItem.name" label="Tenant name" />
+                          <v-text-field v-model="editedItem.name" label="Invoice name" />
                         </v-col>
                         <v-col cols="12">
                           <v-text-field v-model="editedItem.contact_email" label="Contact email" />
@@ -100,7 +100,7 @@ import axios from 'axios'
 export default {
   layout: 'admin-layout',
   data: () => ({
-    totalTenants: 0,
+    totalInvoices: 0,
     page: 1,
     itemsPerPage: 5,
     loading: true,
@@ -110,7 +110,7 @@ export default {
     singleSelect: true,
     selected: [],
     headers: [
-      { text: 'Tenant Name', align: 'left', sortable: true, value: 'name' },
+      { text: 'Invoice Name', align: 'left', sortable: true, value: 'name' },
       { text: 'Contact Email', sortable: true, value: 'contact_email' },
       { text: 'Created', value: 'created_at' },
       { text: 'Actions', value: 'action', sortable: false }
@@ -128,10 +128,10 @@ export default {
   }),
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? 'Create Tenant' : 'Edit Tenant'
+      return this.editedIndex === -1 ? 'Create Invoice' : 'Edit Invoice'
     },
     url () {
-      return `${process.env.API_BASE_URL}/tenants?page=${this.page}&limit=${this.itemsPerPage}`
+      return `${process.env.API_BASE_URL}/invoices?page=${this.page}&limit=${this.itemsPerPage}`
     }
   },
   watch: {
@@ -174,13 +174,13 @@ export default {
 
     deleteItem (item) {
       const index = this.datas.indexOf(item)
-      if (confirm('Are you sure you want to delete this tenant?')) {
+      if (confirm('Are you sure you want to delete this invoice?')) {
         axios
-          .delete(`${process.env.API_BASE_URL}/tenants/${item._id}`)
+          .delete(`${process.env.API_BASE_URL}/invoices/${item._id}`)
           .then((data) => {
             this.datas.splice(index, 1)
             this.$toast.show(
-              "Success! '" + item.title + "' tenant deleted...",
+              "Success! '" + item.title + "' invoice deleted...",
               {
                 position: 'bottom-center',
                 duration: 3000
@@ -203,11 +203,11 @@ export default {
         Object.assign(this.datas[this.editedIndex], this.editedItem)
         const payload = this.editedItem
         axios
-          .put(`${process.env.API_BASE_URL}/tenants/${payload._id}`, payload)
+          .put(`${process.env.API_BASE_URL}/invoices/${payload._id}`, payload)
           .then((data) => {
             // console.log(data);
             this.$toast.show(
-              "Success! Tenant '" + payload.title + "' updated...",
+              "Success! Invoice '" + payload.title + "' updated...",
               {
                 position: 'bottom-center',
                 duration: 3000
@@ -217,12 +217,12 @@ export default {
       } else {
         const payload = this.editedItem
         axios
-          .post(`${process.env.API_BASE_URL}/tenants`, payload)
+          .post(`${process.env.API_BASE_URL}/invoices`, payload)
           .then((data) => {
             // console.log(data);
             this.products.push(this.editedItem)
             this.$toast.show(
-              "Success! New tenant '" + payload.title + "' created.",
+              "Success! New invoice '" + payload.title + "' created.",
               {
                 position: 'bottom-center',
                 duration: 3000
