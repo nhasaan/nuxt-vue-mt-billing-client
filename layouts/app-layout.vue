@@ -49,10 +49,7 @@ import Logo from '~/components/Logo.vue'
 import Sidebar from '~/components/Sidebar.vue'
 
 export default {
-  middleware: ['security'],
-  meta: {
-    auth: { authority: 0 }
-  },
+  middleware: ['auth'],
   components: {
     Logo,
     Sidebar
@@ -327,5 +324,57 @@ footer p a {
 
 .v-data-table td {
   font-size: 1.2rem;
+}
+
+/**
+ Suffix and Prefix for inputs
+*/
+.control.has-suffix .input,
+.control.has-suffix .select select {
+  padding-right: 7em;
+}
+.control.has-prefix .input,
+.control.has-prefix .select select {
+  padding-left: 4.5em;
+}
+.control.has-suffix .suffix.icon {
+  right: 0;
+  width: 6.5em;
+  border-left: 1px solid #dbdbdb;
+}
+.control.has-prefix .prefix.icon {
+  left: 0;
+  width: 4em;
+  border-right: 1px solid #dbdbdb;
+}
+
+.control.has-suffix .suffix b,
+.control.has-prefix .prefix b {
+  vertical-align: center;
+}
+.control.has-prefix .prefix,
+.control.has-suffix .suffix {
+  color: #4d4d4d;
+  height: 2.5em;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  z-index: 4;
+}
+label {
+  text-align: left;
+}
+hr {
+  width: auto;
+  height: 1px;
+  margin: 20px auto;
+  background-color: #dbdbdb;
+}
+hr.hrm {
+  width: 150px;
+  height: 3px;
+  background-color: #2196f3;
+  border: 0;
+  margin: auto auto 80px auto;
 }
 </style>

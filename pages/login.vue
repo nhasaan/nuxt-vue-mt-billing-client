@@ -97,12 +97,12 @@ export default {
               }, 3000)
             }
           } else {
-            this.$toast.error('There is an error, Please try later...!')
+            this.$toast.error('There is an error, Please try later...!', { duration: 3000 })
           }
         })
         .catch((e) => {
           this.formError = e.message
-          this.$toast.error(this.formError)
+          this.$toast.error(this.formError, { duration: 3000 })
         })
     }
     /* --------------End login-------------- */

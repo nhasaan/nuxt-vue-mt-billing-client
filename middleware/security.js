@@ -22,7 +22,7 @@ export default ({ store, route, redirect }) => {
     //   statusCode: 401,
     //   message: 'You must be an admin to visit this page.'
     // })
-    return redirect('/admin/subscribe')
+    return redirect('/subscribe')
   }
-  return redirect('/admin/subscribe')
+  return redirect('/subscribe')
 }

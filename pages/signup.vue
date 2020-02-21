@@ -154,11 +154,11 @@ export default {
       const result = await response.json()
       if (result.success) {
         this.$toast.success(
-          'Congrats, successfuly signup. Please check and verify your email!'
+          'Congrats, successfuly signup. Please check and verify your email!', { duration: 3000 }
         )
         // this.$router.push('/admin')
       } else if (result.error.code === 11000) {
-        this.$toast.error('Please filled out all required field')
+        this.$toast.error('Please filled out all required field', { duration: 3000 })
       }
     }
     /* --------------End Signup-------------- */
