@@ -22,7 +22,7 @@
     "@nuxtjs/vuetify": "^1.9.1",
     "cross-env": "^5.2.0",
     "css-loader": "^3.4.2",
-    "fastify": "^1.13.3",
+    "fastify": "^2.15.1",
     "isomorphic-fetch": "^2.2.1",
     "js-cookie": "^2.2.1",
     "nuxt": "^2.0.0",
